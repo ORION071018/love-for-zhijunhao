@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>致智俊豪 · 我会一直在你身边</title>
+  <style>
+    /* 基础重置与浅蓝氛围 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #e3f2fd 0%, #bbdefb 50%, #e1f5fe 100%);
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 飘浮的小元素背景 —— 温柔点缀 (浅蓝色调) */
+    .floating-item {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.4rem;
+      opacity: 0.4;
+      animation: floatUp 10s infinite ease-in-out;
+      z-index: 1;
+      user-select: none;
+      color: #64b5f6;
+      filter: drop-shadow(0 0 5px rgba(100, 181, 246, 0.3));
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.2;
+      }
+      50% {
+        transform: translateY(-40px) rotate(10deg);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-100px) rotate(-5deg);
+        opacity: 0;
+      }
+    }
+
+    /* 主卡片容器 —— 像一封情书 (浅蓝玻璃质感) */
+    .love-card {
+      position: relative;
+      z-index: 10;
+      max-width: 750px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 56px;
+      padding: 3rem 2rem;
+      box-shadow: 0 30px 50px rgba(100, 150, 220, 0.25),
+                  0 10px 25px rgba(80, 130, 200, 0.2),
+                  inset 0 0 40px rgba(210, 235, 255, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      text-align: center;
+      transition: transform 0.3s ease;
+      animation: breathe 6s infinite alternate;
+    }
+
+    @keyframes breathe {
+      0% {
+        transform: scale(1) translateY(0);
+      }
+      100% {
+        transform: scale(1.01) translateY(-6px);
+      }
+    }
+
+    /* 主标题：宝宝我爱你 (浅蓝系) */
+    .main-title {
+      font-size: clamp(2.4rem, 11vw, 4.8rem);
+      font-weight: 800;
+      letter-spacing: 5px;
+      color: #1565c0;
+      text-shadow: 3px 3px 0 #b3d9ff,
+                   6px 6px 15px rgba(70, 130, 200, 0.3);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+      word-break: break-word;
+      animation: titleGlow 2s infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% {
+        text-shadow: 3px 3px 0 #b3d9ff, 6px 6px 15px rgba(70, 130, 200, 0.2);
+      }
+      100% {
+        text-shadow: 5px 5px 0 #a0cfff, 10px 10px 25px rgba(50, 110, 190, 0.5);
+      }
+    }
+
+    /* 副标题装饰 */
+    .sub-message {
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      color: #1976d2;
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .sub-message span {
+      font-size: 1.6rem;
+      color: #42a5f5;
+    }
+
+    /* 爱心集合 —— 颜色柔和 */
+    .heart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 1.8rem 0 2rem;
+      flex-wrap: wrap;
+    }
+
+    .big-heart {
+      font-size: clamp(3rem, 14vw, 5.5rem);
+      line-height: 1;
+      filter: drop-shadow(0 8px 12px rgba(70, 130, 200, 0.3));
+      animation: heartBeat 1.4s infinite ease-in-out;
+      transform-origin: center;
+      display: inline-block;
+      transition: transform 0.2s;
+      cursor: default;
+    }
+
+    .big-heart:nth-child(2) {
+      animation-delay: 0.2s;
+      font-size: clamp(3.8rem, 17vw, 6.5rem);
+    }
+
+    .big-heart:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes heartBeat {
+      0% {
+        transform: scale(1);
+      }
+      30% {
+        transform: scale(1.15);
+      }
+      50% {
+        transform: scale(0.95);
+      }
+      70% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* 情话段落 - 真挚告白 (浅蓝背景) */
+    .love-note {
+      background: rgba(225, 240, 255, 0.8);
+      border-radius: 40px;
+      padding: 1.8rem 1.8rem;
+      margin: 2rem 0 1.5rem;
+      border: 2px dashed #90caf9;
+      box-shadow: inset 0 2px 12px #ffffff, 0 10px 20px rgba(100, 150, 220, 0.15);
+    }
+
+    .love-note p {
+      font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+      line-height: 1.8;
+      color: #1e3a5f;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      word-break: break-word;
+    }
+
+    .love-note p + p {
+      margin-top: 0.6rem;
+    }
+
+    /* 强调文案：无论是宝宝还是弟弟或者是狗狗我都会陪在智俊豪身边 */
+    .highlight-line {
+      font-size: clamp(1.1rem, 4.6vw, 1.5rem) !important;
+      font-weight: 700 !important;
+      color: #0d47a1 !important;
+      background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+      padding: 0.9rem 1.4rem;
+      border-radius: 40px;
+      margin-top: 1rem;
+      border-left: 6px solid #1976d2;
+      border-right: 6px solid #1976d2;
+      box-shadow: 0 4px 12px rgba(30, 100, 180, 0.2);
+      letter-spacing: 1px;
+      line-height: 1.6;
+    }
+
+    /* 动态小字 */
+    .daily-love {
+      margin-top: 1.2rem;
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      color: #1565c0;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200, 225, 250, 0.7);
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    /* 飘动点缀——星星/小爱心 */
+    .sparkle {
+      position: absolute;
+      color: #64b5f6;
+      font-size: 1.2rem;
+      animation: twinkle 2s infinite;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 480px) {
+      .love-card {
+        padding: 2rem 1.2rem;
+        border-radius: 40px;
+      }
+
+      .heart-container {
+        gap: 0.5rem;
+      }
+
+      .love-note {
+        padding: 1.2rem 1rem;
+      }
+
+      .highlight-line {
+        padding: 0.7rem 1rem;
+        font-size: 1rem !important;
+      }
+    }
+
+    /* 点击小爱心效果 */
+    .click-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.8rem;
+      animation: popUp 0.7s ease-out forwards;
+      z-index: 999;
+    }
+
+    @keyframes popUp {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -150%) scale(1.6);
+      }
+    }
+
+    /* 底部 */
+    .footer-note {
+      margin-top: 1.8rem;
+      font-size: 0.9rem;
+      color: #5a8fbb;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 飘浮的浅蓝装饰背景 -->
+  <div id="floatingContainer"></div>
+
+  <!-- 主卡片 -->
+  <div class="love-card">
+    <!-- 隐约的小闪烁 -->
+    <div class="sparkle" style="top: 6%; left: 6%;">✨</div>
+    <div class="sparkle" style="top: 12%; right: 8%; animation-delay: 0.5s;">✨</div>
+    <div class="sparkle" style="bottom: 10%; left: 12%; animation-delay: 1s;">✨</div>
+    <div class="sparkle" style="bottom: 18%; right: 10%; animation-delay: 1.8s;">✨</div>
+
+    <!-- 标题：宝宝我爱你 -->
+    <h1 class="main-title">宝宝我爱你</h1>
+    
+    <!-- 副标题 -->
+    <div class="sub-message">
+      <span>💙</span> 只对智俊豪说的悄悄话 <span>💙</span>
+    </div>
+
+    <!-- 爱心大集合 -->
+    <div class="heart-container">
+      <div class="big-heart" title="爱心">💙</div>
+      <div class="big-heart" title="爱心">💖</div>
+      <div class="big-heart" title="爱心">💙</div>
+    </div>
+
+    <!-- 情话内容，加入指定文案 -->
+    <div class="love-note">
+      <p>你是我每一天的开心源泉，</p>
+      <p>是我疲惫时最想拥抱的人。</p>
+      <p>不管未来怎样，我都会一直牵着你的手。</p>
+      <!-- 核心文案 -->
+      <p class="highlight-line">无论是宝宝还是弟弟或者是狗狗<br>我都会陪在智俊豪身边</p>
+    </div>
+
+    <!-- 小字告白 -->
+    <div class="daily-love">
+      <span>🌊</span> 每一天都比昨天更爱你 <span>🌊</span>
+    </div>
+
+    <!-- 落款 -->
+    <div class="footer-note">
+      —— 永远爱你的我 ——
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // 1. 生成飘浮的小装饰 (浅蓝色调)
+      const floatingContainer = document.getElementById('floatingContainer');
+      // 使用蓝色系的符号
+      const symbols = ['💙', '💎', '🫧', '✨', '🌊', '💠', '🔹', '🐋', '❄️', '☁️'];
+      const FLOAT_COUNT = 22;
+
+      for (let i = 0; i < FLOAT_COUNT; i++) {
+        const item = document.createElement('div');
+        item.className = 'floating-item';
+        item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        // 随机位置
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        item.style.left = left + '%';
+        item.style.top = top + '%';
+        // 随机大小
+        const size = 0.8 + Math.random() * 1.8;
+        item.style.fontSize = size + 'rem';
+        // 随机动画
+        const duration = 6 + Math.random() * 12;
+        const delay = Math.random() * 8;
+        item.style.animation = `floatUp ${duration}s infinite ease-in-out`;
+        item.style.animationDelay = delay + 's';
+        // 随机透明度
+        item.style.opacity = 0.2 + Math.random() * 0.3;
+        floatingContainer.appendChild(item);
+      }
+
+      // 2. 点击页面弹出小爱心 (蓝色系)
+      document.body.addEventListener('click', function(e) {
+        const clickHeart = document.createElement('div');
+        clickHeart.className = 'click-heart';
+        const heartSymbols = ['💙', '💖', '🩵', '💎', '✨', '🌊'];
+        clickHeart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        clickHeart.style.left = e.clientX + 'px';
+        clickHeart.style.top = e.clientY + 'px';
+        clickHeart.style.fontSize = (1.2 + Math.random() * 1.2) + 'rem';
+        document.body.appendChild(clickHeart);
+
+        setTimeout(() => {
+          if (clickHeart.parentNode) {
+            clickHeart.remove();
+          }
+        }, 700);
+      });
+
+      // 3. 主标题点击跳动效果
+      const mainTitle = document.querySelector('.main-title');
+      if (mainTitle) {
+        mainTitle.addEventListener('click', function() {
+          const bigHearts = document.querySelectorAll('.big-heart');
+          bigHearts.forEach((heart) => {
+            heart.style.animationDuration = '0.6s';
+            setTimeout(() => {
+              heart.style.animationDuration = '1.4s';
+            }, 1000);
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
