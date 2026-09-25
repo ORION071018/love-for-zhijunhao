@@ -89,28 +89,15 @@
       font-weight: 800;
       color: #1565c0;
       letter-spacing: 3px;
-      margin-bottom: 0.8rem;
-      text-shadow: 2px 2px 0 #b3d9ff;
-    }
-
-    .gate-subtitle {
-      font-size: clamp(0.95rem, 4vw, 1.1rem);
-      color: #1976d2;
       margin-bottom: 2rem;
-      line-height: 1.6;
-      opacity: 0.9;
-    }
-
-    .gate-subtitle strong {
-      color: #0d47a1;
-      font-weight: 700;
+      text-shadow: 2px 2px 0 #b3d9ff;
     }
 
     .input-group {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .birthday-input {
@@ -169,24 +156,6 @@
       transform: translateY(-1px) scale(0.98);
     }
 
-    .error-tip {
-      color: #d32f2f;
-      font-size: 0.95rem;
-      min-height: 1.4rem;
-      letter-spacing: 1px;
-      margin-top: 0.5rem;
-      transition: opacity 0.3s;
-      font-weight: 500;
-    }
-
-    .hint-tip {
-      color: #1976d2;
-      font-size: 0.85rem;
-      margin-top: 1.2rem;
-      opacity: 0.7;
-      letter-spacing: 1px;
-    }
-
     /* ================= 主内容页 ================= */
     .love-page {
       position: relative;
@@ -216,7 +185,6 @@
       transform: scale(1);
     }
 
-    /* 主标题 */
     .main-title {
       font-size: clamp(2.4rem, 11vw, 4.8rem);
       font-weight: 800;
@@ -454,9 +422,18 @@
       transform: translateY(-1px) scale(0.98);
     }
 
+    /* 抖动动画 */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-8px); }
+      40% { transform: translateX(8px); }
+      60% { transform: translateX(-6px); }
+      80% { transform: translateX(6px); }
+    }
+
     /* 响应式 */
     @media (max-width: 480px) {
-      .love-card, .love-page, .gate-page {
+      .love-page, .gate-page {
         padding: 2rem 1.2rem;
         border-radius: 40px;
       }
@@ -476,22 +453,18 @@
   <!-- ================= 验证页面 ================= -->
   <div class="gate-page" id="gatePage">
     <div class="gate-icon">💙</div>
-    <h2 class="gate-title">验证一下你是我的谁</h2>
-    <p class="gate-subtitle">请输入 <strong>我的生日</strong> 来解锁这份告白<br>（试试输入：九月八日）</p>
+    <h2 class="gate-title">输入我的生日</h2>
 
     <div class="input-group">
       <input 
         type="text" 
         id="birthdayInput" 
         class="birthday-input" 
-        placeholder="例如：九月八日 或 9月8日"
+        placeholder=""
         autocomplete="off"
       >
-      <button class="confirm-btn" id="confirmBtn">确认解锁 💌</button>
+      <button class="confirm-btn" id="confirmBtn">确认 💌</button>
     </div>
-
-    <div class="error-tip" id="errorTip"></div>
-    <div class="hint-tip">提示：接受“九月八日”“9月8日”“9月八日”“9.8”等格式</div>
   </div>
 
   <!-- ================= 主内容页 ================= -->
@@ -580,7 +553,6 @@
       const lovePage = document.getElementById('lovePage');
       const birthdayInput = document.getElementById('birthdayInput');
       const confirmBtn = document.getElementById('confirmBtn');
-      const errorTip = document.getElementById('errorTip');
       const successModal = document.getElementById('successModal');
       const closeModalBtn = document.getElementById('closeModalBtn');
 
@@ -610,14 +582,12 @@
       // 判断是否匹配
       function isValidBirthday(input) {
         const cleaned = cleanInput(input);
-        // 直接匹配预设答案的清洗版
         const validCleaned = correctAnswers.map(a => cleanInput(a));
         if (validCleaned.includes(cleaned)) return true;
 
         // 宽松匹配：包含"九"和"八"，或者包含"9"和"8"
         const hasNine = /九|9/.test(cleaned);
         const hasEight = /八|8/.test(cleaned);
-        // 长度合理（防止输入一长串）
         if (cleaned.length <= 6 && hasNine && hasEight) return true;
 
         return false;
@@ -627,53 +597,33 @@
       function verify() {
         const value = birthdayInput.value;
         if (!value.trim()) {
-          errorTip.textContent = '💧 先输入我的生日吧～';
           birthdayInput.focus();
           return;
         }
 
         if (isValidBirthday(value)) {
           // 验证成功
-          errorTip.textContent = '';
           birthdayInput.blur();
           
-          // 隐藏验证页
           gatePage.style.opacity = '0';
           gatePage.style.transform = 'scale(0.9)';
           setTimeout(() => {
             gatePage.style.display = 'none';
-            // 显示主内容
             lovePage.classList.add('show');
-            // 再延迟一点弹出成功弹窗
             setTimeout(() => {
               successModal.classList.add('show');
             }, 500);
           }, 400);
         } else {
-          // 验证失败
-          errorTip.textContent = '💧 不对哦，再想想～（提示：九月八日）';
+          // 验证失败，只抖动，无任何提示
           birthdayInput.value = '';
           birthdayInput.focus();
-          // 抖动效果
           birthdayInput.style.animation = 'none';
           setTimeout(() => {
             birthdayInput.style.animation = 'shake 0.5s';
           }, 10);
         }
       }
-
-      // 添加抖动动画
-      const styleSheet = document.createElement('style');
-      styleSheet.textContent = `
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          20% { transform: translateX(-8px); }
-          40% { transform: translateX(8px); }
-          60% { transform: translateX(-6px); }
-          80% { transform: translateX(6px); }
-        }
-      `;
-      document.head.appendChild(styleSheet);
 
       // 绑定事件
       confirmBtn.addEventListener('click', verify);
@@ -686,7 +636,6 @@
         successModal.classList.remove('show');
       });
 
-      // 点击弹窗背景也可关闭
       successModal.addEventListener('click', function(e) {
         if (e.target === successModal) {
           successModal.classList.remove('show');
