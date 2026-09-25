@@ -24,7 +24,7 @@
       overflow-x: hidden;
     }
 
-    /* 飘浮的小元素背景 —— 温柔点缀 (浅蓝色调) */
+    /* 飘浮的小元素背景 */
     .floating-item {
       position: fixed;
       pointer-events: none;
@@ -38,22 +38,157 @@
     }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.2;
-      }
-      50% {
-        transform: translateY(-40px) rotate(10deg);
-        opacity: 0.5;
-      }
-      100% {
-        transform: translateY(-100px) rotate(-5deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
+      50% { transform: translateY(-40px) rotate(10deg); opacity: 0.5; }
+      100% { transform: translateY(-100px) rotate(-5deg); opacity: 0; }
     }
 
-    /* 主卡片容器 —— 像一封情书 (浅蓝玻璃质感) */
-    .love-card {
+    /* ================= 验证页面 ================= */
+    .gate-page {
+      position: relative;
+      z-index: 20;
+      max-width: 500px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 48px;
+      padding: 3rem 2rem;
+      box-shadow: 0 30px 50px rgba(100, 150, 220, 0.3),
+                  0 10px 25px rgba(80, 130, 200, 0.2),
+                  inset 0 0 40px rgba(210, 235, 255, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      text-align: center;
+      animation: breathe 6s infinite alternate;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    @keyframes breathe {
+      0% { transform: scale(1) translateY(0); }
+      100% { transform: scale(1.01) translateY(-6px); }
+    }
+
+    .gate-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: heartBeat 1.4s infinite ease-in-out;
+      display: inline-block;
+      filter: drop-shadow(0 8px 12px rgba(70, 130, 200, 0.3));
+    }
+
+    @keyframes heartBeat {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.15); }
+      50% { transform: scale(0.95); }
+      70% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .gate-title {
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      font-weight: 800;
+      color: #1565c0;
+      letter-spacing: 3px;
+      margin-bottom: 0.8rem;
+      text-shadow: 2px 2px 0 #b3d9ff;
+    }
+
+    .gate-subtitle {
+      font-size: clamp(0.95rem, 4vw, 1.1rem);
+      color: #1976d2;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .gate-subtitle strong {
+      color: #0d47a1;
+      font-weight: 700;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .birthday-input {
+      width: 100%;
+      padding: 1.1rem 1.5rem;
+      font-size: 1.1rem;
+      border: 2px solid #90caf9;
+      border-radius: 60px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #0d47a1;
+      outline: none;
+      text-align: center;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      font-weight: 500;
+    }
+
+    .birthday-input::placeholder {
+      color: #90a4ae;
+      letter-spacing: 1px;
+      font-weight: 400;
+    }
+
+    .birthday-input:focus {
+      border-color: #1976d2;
+      box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.15),
+                  0 8px 20px rgba(25, 118, 210, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .confirm-btn {
+      width: 100%;
+      padding: 1.1rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: white;
+      background: linear-gradient(145deg, #42a5f5, #1976d2);
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(25, 118, 210, 0.35),
+                  inset 0 2px 5px rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .confirm-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(25, 118, 210, 0.45),
+                  inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    }
+
+    .confirm-btn:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .error-tip {
+      color: #d32f2f;
+      font-size: 0.95rem;
+      min-height: 1.4rem;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+      transition: opacity 0.3s;
+      font-weight: 500;
+    }
+
+    .hint-tip {
+      color: #1976d2;
+      font-size: 0.85rem;
+      margin-top: 1.2rem;
+      opacity: 0.7;
+      letter-spacing: 1px;
+    }
+
+    /* ================= 主内容页 ================= */
+    .love-page {
       position: relative;
       z-index: 10;
       max-width: 750px;
@@ -68,20 +203,20 @@
                   inset 0 0 40px rgba(210, 235, 255, 0.6);
       border: 2px solid rgba(255, 255, 255, 0.8);
       text-align: center;
-      transition: transform 0.3s ease;
       animation: breathe 6s infinite alternate;
+      display: none;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    @keyframes breathe {
-      0% {
-        transform: scale(1) translateY(0);
-      }
-      100% {
-        transform: scale(1.01) translateY(-6px);
-      }
+    .love-page.show {
+      display: block;
+      opacity: 1;
+      transform: scale(1);
     }
 
-    /* 主标题：宝宝我爱你 (浅蓝系) */
+    /* 主标题 */
     .main-title {
       font-size: clamp(2.4rem, 11vw, 4.8rem);
       font-weight: 800;
@@ -96,15 +231,10 @@
     }
 
     @keyframes titleGlow {
-      0% {
-        text-shadow: 3px 3px 0 #b3d9ff, 6px 6px 15px rgba(70, 130, 200, 0.2);
-      }
-      100% {
-        text-shadow: 5px 5px 0 #a0cfff, 10px 10px 25px rgba(50, 110, 190, 0.5);
-      }
+      0% { text-shadow: 3px 3px 0 #b3d9ff, 6px 6px 15px rgba(70, 130, 200, 0.2); }
+      100% { text-shadow: 5px 5px 0 #a0cfff, 10px 10px 25px rgba(50, 110, 190, 0.5); }
     }
 
-    /* 副标题装饰 */
     .sub-message {
       font-size: clamp(1.1rem, 4.5vw, 1.5rem);
       color: #1976d2;
@@ -118,12 +248,8 @@
       gap: 8px;
     }
 
-    .sub-message span {
-      font-size: 1.6rem;
-      color: #42a5f5;
-    }
+    .sub-message span { font-size: 1.6rem; color: #42a5f5; }
 
-    /* 爱心集合 —— 颜色柔和 */
     .heart-container {
       display: flex;
       justify-content: center;
@@ -144,34 +270,9 @@
       cursor: default;
     }
 
-    .big-heart:nth-child(2) {
-      animation-delay: 0.2s;
-      font-size: clamp(3.8rem, 17vw, 6.5rem);
-    }
+    .big-heart:nth-child(2) { animation-delay: 0.2s; font-size: clamp(3.8rem, 17vw, 6.5rem); }
+    .big-heart:nth-child(3) { animation-delay: 0.4s; }
 
-    .big-heart:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes heartBeat {
-      0% {
-        transform: scale(1);
-      }
-      30% {
-        transform: scale(1.15);
-      }
-      50% {
-        transform: scale(0.95);
-      }
-      70% {
-        transform: scale(1.1);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    /* 情话段落 - 真挚告白 (浅蓝背景) */
     .love-note {
       background: rgba(225, 240, 255, 0.8);
       border-radius: 40px;
@@ -190,11 +291,8 @@
       word-break: break-word;
     }
 
-    .love-note p + p {
-      margin-top: 0.6rem;
-    }
+    .love-note p + p { margin-top: 0.6rem; }
 
-    /* 强调文案：无论是宝宝还是弟弟或者是狗狗我都会陪在智俊豪身边 */
     .highlight-line {
       font-size: clamp(1.1rem, 4.6vw, 1.5rem) !important;
       font-weight: 700 !important;
@@ -210,7 +308,6 @@
       line-height: 1.6;
     }
 
-    /* 动态小字 */
     .daily-love {
       margin-top: 1.2rem;
       font-size: clamp(1rem, 4vw, 1.2rem);
@@ -226,7 +323,6 @@
       border: 1px solid rgba(255, 255, 255, 0.8);
     }
 
-    /* 飘动点缀——星星/小爱心 */
     .sparkle {
       position: absolute;
       color: #64b5f6;
@@ -241,25 +337,11 @@
       50% { opacity: 1; transform: scale(1.3); }
     }
 
-    /* 响应式调整 */
-    @media (max-width: 480px) {
-      .love-card {
-        padding: 2rem 1.2rem;
-        border-radius: 40px;
-      }
-
-      .heart-container {
-        gap: 0.5rem;
-      }
-
-      .love-note {
-        padding: 1.2rem 1rem;
-      }
-
-      .highlight-line {
-        padding: 0.7rem 1rem;
-        font-size: 1rem !important;
-      }
+    .footer-note {
+      margin-top: 1.8rem;
+      font-size: 0.9rem;
+      color: #5a8fbb;
+      letter-spacing: 2px;
     }
 
     /* 点击小爱心效果 */
@@ -272,22 +354,118 @@
     }
 
     @keyframes popUp {
-      0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(0.8);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -150%) scale(1.6);
-      }
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8); }
+      100% { opacity: 0; transform: translate(-50%, -150%) scale(1.6); }
     }
 
-    /* 底部 */
-    .footer-note {
-      margin-top: 1.8rem;
-      font-size: 0.9rem;
-      color: #5a8fbb;
-      letter-spacing: 2px;
+    /* ================= 成功弹窗 ================= */
+    .success-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 60, 100, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .success-modal.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      max-width: 420px;
+      width: 100%;
+      background: linear-gradient(160deg, #ffffff, #e3f2fd);
+      border-radius: 48px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(20, 60, 120, 0.35),
+                  0 0 0 6px rgba(255, 255, 255, 0.6);
+      border: 2px solid white;
+      transform: scale(0.8);
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .success-modal.show .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-emoji {
+      font-size: 4rem;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+      animation: heartBeat 1.2s infinite ease-in-out;
+    }
+
+    .modal-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #0d47a1;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+
+    .modal-text {
+      font-size: 1.2rem;
+      color: #1565c0;
+      font-weight: 600;
+      line-height: 1.8;
+      letter-spacing: 1px;
+      margin-bottom: 1.8rem;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1.2rem;
+      border-radius: 30px;
+      border: 2px dashed #90caf9;
+    }
+
+    .modal-text strong {
+      color: #d32f2f;
+      font-size: 1.35rem;
+    }
+
+    .modal-btn {
+      padding: 0.9rem 2.2rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: white;
+      background: linear-gradient(145deg, #42a5f5, #1976d2);
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(25, 118, 210, 0.35);
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .modal-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(25, 118, 210, 0.45);
+    }
+
+    .modal-btn:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    /* 响应式 */
+    @media (max-width: 480px) {
+      .love-card, .love-page, .gate-page {
+        padding: 2rem 1.2rem;
+        border-radius: 40px;
+      }
+      .heart-container { gap: 0.5rem; }
+      .love-note { padding: 1.2rem 1rem; }
+      .highlight-line { padding: 0.7rem 1rem; font-size: 1rem !important; }
+      .gate-title { font-size: 1.3rem; }
+      .modal-content { padding: 1.8rem 1.2rem; }
+      .modal-text { font-size: 1.05rem; }
     }
   </style>
 </head>
@@ -295,54 +473,79 @@
   <!-- 飘浮的浅蓝装饰背景 -->
   <div id="floatingContainer"></div>
 
-  <!-- 主卡片 -->
-  <div class="love-card">
-    <!-- 隐约的小闪烁 -->
+  <!-- ================= 验证页面 ================= -->
+  <div class="gate-page" id="gatePage">
+    <div class="gate-icon">💙</div>
+    <h2 class="gate-title">验证一下你是我的谁</h2>
+    <p class="gate-subtitle">请输入 <strong>我的生日</strong> 来解锁这份告白<br>（试试输入：九月八日）</p>
+
+    <div class="input-group">
+      <input 
+        type="text" 
+        id="birthdayInput" 
+        class="birthday-input" 
+        placeholder="例如：九月八日 或 9月8日"
+        autocomplete="off"
+      >
+      <button class="confirm-btn" id="confirmBtn">确认解锁 💌</button>
+    </div>
+
+    <div class="error-tip" id="errorTip"></div>
+    <div class="hint-tip">提示：接受“九月八日”“9月8日”“9月八日”“9.8”等格式</div>
+  </div>
+
+  <!-- ================= 主内容页 ================= -->
+  <div class="love-page" id="lovePage">
     <div class="sparkle" style="top: 6%; left: 6%;">✨</div>
     <div class="sparkle" style="top: 12%; right: 8%; animation-delay: 0.5s;">✨</div>
     <div class="sparkle" style="bottom: 10%; left: 12%; animation-delay: 1s;">✨</div>
     <div class="sparkle" style="bottom: 18%; right: 10%; animation-delay: 1.8s;">✨</div>
 
-    <!-- 标题：宝宝我爱你 -->
     <h1 class="main-title">宝宝我爱你</h1>
     
-    <!-- 副标题 -->
     <div class="sub-message">
       <span>💙</span> 只对智俊豪说的悄悄话 <span>💙</span>
     </div>
 
-    <!-- 爱心大集合 -->
     <div class="heart-container">
       <div class="big-heart" title="爱心">💙</div>
       <div class="big-heart" title="爱心">💖</div>
       <div class="big-heart" title="爱心">💙</div>
     </div>
 
-    <!-- 情话内容，加入指定文案 -->
     <div class="love-note">
       <p>You are my only</p>
       <p>You are my life</p>
       <p>I will love you forever</p>
-      <!-- 核心文案 -->
       <p class="highlight-line">无论是宝宝还是弟弟或者是狗狗<br>我都会陪在智俊豪身边</p>
     </div>
 
-    <!-- 小字告白 -->
     <div class="daily-love">
       <span>🌊</span> 每一天都比昨天更爱你 <span>🌊</span>
     </div>
 
-    <!-- 落款 -->
     <div class="footer-note">
       —— 永远爱你的我 ——
     </div>
   </div>
 
+  <!-- ================= 成功弹窗 ================= -->
+  <div class="success-modal" id="successModal">
+    <div class="modal-content">
+      <div class="modal-emoji">🎉</div>
+      <h3 class="modal-title">验证成功！</h3>
+      <p class="modal-text">
+        没错，你就是我最爱的智俊豪～<br>
+        <strong>凭此截图，可以咬一口屁股！</strong>
+      </p>
+      <button class="modal-btn" id="closeModalBtn">嘿嘿，收下啦 💙</button>
+    </div>
+  </div>
+
   <script>
     (function() {
-      // 1. 生成飘浮的小装饰 (浅蓝色调)
+      // ===== 飘浮背景装饰 =====
       const floatingContainer = document.getElementById('floatingContainer');
-      // 使用蓝色系的符号
       const symbols = ['💙', '💎', '🫧', '✨', '🌊', '💠', '🔹', '🐋', '❄️', '☁️'];
       const FLOAT_COUNT = 22;
 
@@ -350,25 +553,16 @@
         const item = document.createElement('div');
         item.className = 'floating-item';
         item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        // 随机位置
-        const left = Math.random() * 100;
-        const top = Math.random() * 100;
-        item.style.left = left + '%';
-        item.style.top = top + '%';
-        // 随机大小
-        const size = 0.8 + Math.random() * 1.8;
-        item.style.fontSize = size + 'rem';
-        // 随机动画
-        const duration = 6 + Math.random() * 12;
-        const delay = Math.random() * 8;
-        item.style.animation = `floatUp ${duration}s infinite ease-in-out`;
-        item.style.animationDelay = delay + 's';
-        // 随机透明度
+        item.style.left = Math.random() * 100 + '%';
+        item.style.top = Math.random() * 100 + '%';
+        item.style.fontSize = (0.8 + Math.random() * 1.8) + 'rem';
+        item.style.animation = `floatUp ${6 + Math.random() * 12}s infinite ease-in-out`;
+        item.style.animationDelay = Math.random() * 8 + 's';
         item.style.opacity = 0.2 + Math.random() * 0.3;
         floatingContainer.appendChild(item);
       }
 
-      // 2. 点击页面弹出小爱心 (蓝色系)
+      // ===== 点击弹出小爱心 =====
       document.body.addEventListener('click', function(e) {
         const clickHeart = document.createElement('div');
         clickHeart.className = 'click-heart';
@@ -378,24 +572,135 @@
         clickHeart.style.top = e.clientY + 'px';
         clickHeart.style.fontSize = (1.2 + Math.random() * 1.2) + 'rem';
         document.body.appendChild(clickHeart);
-
-        setTimeout(() => {
-          if (clickHeart.parentNode) {
-            clickHeart.remove();
-          }
-        }, 700);
+        setTimeout(() => { if (clickHeart.parentNode) clickHeart.remove(); }, 700);
       });
 
-      // 3. 主标题点击跳动效果
+      // ===== 生日验证逻辑 =====
+      const gatePage = document.getElementById('gatePage');
+      const lovePage = document.getElementById('lovePage');
+      const birthdayInput = document.getElementById('birthdayInput');
+      const confirmBtn = document.getElementById('confirmBtn');
+      const errorTip = document.getElementById('errorTip');
+      const successModal = document.getElementById('successModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+
+      // 正确的生日格式（统一清洗后匹配）
+      const correctAnswers = [
+        '九月八日',
+        '9月8日',
+        '9月八日',
+        '九月8日',
+        '9.8',
+        '9-8',
+        '0908',
+        '9/8',
+        '9月8号',
+        '九月八号'
+      ];
+
+      // 清洗输入：去掉空格、标点统一
+      function cleanInput(str) {
+        return str
+          .trim()
+          .replace(/\s+/g, '')
+          .replace(/[。，,、\.\-\/]/g, '')
+          .toLowerCase();
+      }
+
+      // 判断是否匹配
+      function isValidBirthday(input) {
+        const cleaned = cleanInput(input);
+        // 直接匹配预设答案的清洗版
+        const validCleaned = correctAnswers.map(a => cleanInput(a));
+        if (validCleaned.includes(cleaned)) return true;
+
+        // 宽松匹配：包含"九"和"八"，或者包含"9"和"8"
+        const hasNine = /九|9/.test(cleaned);
+        const hasEight = /八|8/.test(cleaned);
+        // 长度合理（防止输入一长串）
+        if (cleaned.length <= 6 && hasNine && hasEight) return true;
+
+        return false;
+      }
+
+      // 执行验证
+      function verify() {
+        const value = birthdayInput.value;
+        if (!value.trim()) {
+          errorTip.textContent = '💧 先输入我的生日吧～';
+          birthdayInput.focus();
+          return;
+        }
+
+        if (isValidBirthday(value)) {
+          // 验证成功
+          errorTip.textContent = '';
+          birthdayInput.blur();
+          
+          // 隐藏验证页
+          gatePage.style.opacity = '0';
+          gatePage.style.transform = 'scale(0.9)';
+          setTimeout(() => {
+            gatePage.style.display = 'none';
+            // 显示主内容
+            lovePage.classList.add('show');
+            // 再延迟一点弹出成功弹窗
+            setTimeout(() => {
+              successModal.classList.add('show');
+            }, 500);
+          }, 400);
+        } else {
+          // 验证失败
+          errorTip.textContent = '💧 不对哦，再想想～（提示：九月八日）';
+          birthdayInput.value = '';
+          birthdayInput.focus();
+          // 抖动效果
+          birthdayInput.style.animation = 'none';
+          setTimeout(() => {
+            birthdayInput.style.animation = 'shake 0.5s';
+          }, 10);
+        }
+      }
+
+      // 添加抖动动画
+      const styleSheet = document.createElement('style');
+      styleSheet.textContent = `
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          20% { transform: translateX(-8px); }
+          40% { transform: translateX(8px); }
+          60% { transform: translateX(-6px); }
+          80% { transform: translateX(6px); }
+        }
+      `;
+      document.head.appendChild(styleSheet);
+
+      // 绑定事件
+      confirmBtn.addEventListener('click', verify);
+      birthdayInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') verify();
+      });
+
+      // 关闭弹窗
+      closeModalBtn.addEventListener('click', function() {
+        successModal.classList.remove('show');
+      });
+
+      // 点击弹窗背景也可关闭
+      successModal.addEventListener('click', function(e) {
+        if (e.target === successModal) {
+          successModal.classList.remove('show');
+        }
+      });
+
+      // 主标题点击跳动（保留）
       const mainTitle = document.querySelector('.main-title');
       if (mainTitle) {
         mainTitle.addEventListener('click', function() {
           const bigHearts = document.querySelectorAll('.big-heart');
           bigHearts.forEach((heart) => {
             heart.style.animationDuration = '0.6s';
-            setTimeout(() => {
-              heart.style.animationDuration = '1.4s';
-            }, 1000);
+            setTimeout(() => { heart.style.animationDuration = '1.4s'; }, 1000);
           });
         });
       }
